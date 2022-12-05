@@ -2501,37 +2501,39 @@ B Z
 A Z`;
 
 // a = rock, b = paper, z = scissors
-// x = rock, y = paper, z = scissors
+// x = lose, y = draw, z = win
 // 1 for Rock, 2 for Paper, and 3 for Scissors
 // 0 if you lost, 3 if the round was a draw, and 6 if you won
 
 const encryptedStrategyGuideSplit = encryptedStrategyGuide.split(/\n/);
-// console.log(encryptedStrategyGuideSplit);
 
 const GameFunction = () => {
     const scoreArray = [];
     for (let i = 0; i < encryptedStrategyGuideSplit.length; i++) {
         const strategyGuide = encryptedStrategyGuideSplit[i].split(' ');
         let opponentMove = strategyGuide[0];
-        const playerMove = strategyGuide[1];
-        // Set Opponent Values
-        opponentMove === 'A' ? opponentMove = 'X'
-        : opponentMove === 'B' ? opponentMove = 'Y'
-        : opponentMove = 'Z'
+        let playerMove = strategyGuide[1];
+        playerMove === 'Y' ? playerMove = opponentMove
+        // Set Condition: Win
+        : playerMove === 'Z' && opponentMove === 'A' ? playerMove = 'B'
+        : playerMove === 'Z' && opponentMove === 'B' ? playerMove = 'C'
+        : playerMove === 'Z' && opponentMove === 'C' ? playerMove = 'A'
+        // Set Condition: Lose
+        : playerMove === 'X' && opponentMove === 'A' ? playerMove = 'C'
+        : playerMove === 'X' && opponentMove === 'B' ? playerMove = 'A'
+        : playerMove === 'X' && opponentMove === 'C' ? playerMove = 'B'
+        : console.log('Cannot Decrypt Move');
         // Add points based on Player Move
-        playerMove === 'X' ? scoreArray.push(1) 
-        : playerMove === 'Y' ? scoreArray.push(2)
-        : playerMove === 'Z' ? scoreArray.push(3)
+        playerMove === 'A' ? scoreArray.push(1) 
+        : playerMove === 'B' ? scoreArray.push(2)
+        : playerMove === 'C' ? scoreArray.push(3)
         : console.log('Cannot Decrypt Move');
         // Add points based on Win Conditions
         playerMove === opponentMove ? scoreArray.push(3)
-        : playerMove === 'X' && opponentMove === 'Z' ||
-        playerMove === 'Y' && opponentMove === 'X' ||
-        playerMove === 'Z' && opponentMove === 'Y' ? scoreArray.push(6)
-        : playerMove === opponentMove ? scoreArray.push(3)
+        : playerMove === 'A' && opponentMove === 'C' ||
+        playerMove === 'B' && opponentMove === 'A' ||
+        playerMove === 'C' && opponentMove === 'B' ? scoreArray.push(6)
         : scoreArray.push(0);
-
-
     }
     console.log('Total Player Points:');
     console.log(scoreArray.reduce((accumulator, value) => {
