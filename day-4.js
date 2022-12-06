@@ -1018,7 +1018,7 @@ for (let i = 0; i < separateAssignments.length; i++) {
     const secondRangeArray = numberRange(secondRangeStart, secondRangeEnd);
     const matches = firstRangeArray.filter((element) => secondRangeArray.includes(element));
 
-    if (matches.length === firstRangeArray.length || matches.length === secondRangeArray.length) {
+    if (matches.length > 0) {
         overlappingAssignments.push(1);
     }
 }
