@@ -302,13 +302,14 @@ fnnjZLWdrnqdWrrPLddqVqBzGDJJFGCBDfJmbDzFMbmB`;
 
 const compartmentItems = itemList.split(/\n/);
 const priorityValue = [];
-for (let i = 0; i < compartmentItems.length; i++) {
-    const firstHalf = compartmentItems[i].slice(0, compartmentItems[i].length / 2);
-    const secondHalf = compartmentItems[i].slice(compartmentItems[i].length / 2);
-    const firstHalfArray = firstHalf.split("");
-    const secondHalfArray = secondHalf.split("");
-    const matches = firstHalfArray.filter(element => secondHalfArray.includes(element));
-    const uniqueMatches = [...new Set(matches)];
+
+for (let i = 0; i < compartmentItems.length; i += 3) {
+    const elfOne = compartmentItems[i].split("");
+    const elfTwo = compartmentItems[i + 1].split("");
+    const elfThree = compartmentItems[i + 2].split("");
+    const firstMatches = elfOne.filter(element => elfTwo.includes(element));
+    const secondMatches = firstMatches.filter(element => elfThree.includes(element));
+    const uniqueMatches = [...new Set(secondMatches)];
     uniqueMatches[0] === uniqueMatches[0].toUpperCase() ? priorityValue.push(uniqueMatches[0].charCodeAt(0) - 64 + 26)
     : priorityValue.push(uniqueMatches[0].charCodeAt(0) - 96);
 }
