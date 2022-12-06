@@ -1,5 +1,4 @@
-const itemList =
-`BdbzzddChsWrRFbzBrszbhWMLNJHLLLLHZtSLglFNZHLJH
+const itemList = `BdbzzddChsWrRFbzBrszbhWMLNJHLLLLHZtSLglFNZHLJH
 nnfMwqpQTMffHlNNLllHnZSS
 cGpcMwfppfqcjcTCBBzWDsDbDrjzWz
 LhfjhcdjcGdhFfdGfdjdvwCCZMvvLvWwMLCLSwZC
@@ -307,13 +306,18 @@ for (let i = 0; i < compartmentItems.length; i += 3) {
     const elfOne = compartmentItems[i].split("");
     const elfTwo = compartmentItems[i + 1].split("");
     const elfThree = compartmentItems[i + 2].split("");
-    const firstMatches = elfOne.filter(element => elfTwo.includes(element));
-    const secondMatches = firstMatches.filter(element => elfThree.includes(element));
+    const firstMatches = elfOne.filter((element) => elfTwo.includes(element));
+    const secondMatches = firstMatches.filter((element) =>
+        elfThree.includes(element)
+    );
     const uniqueMatches = [...new Set(secondMatches)];
-    uniqueMatches[0] === uniqueMatches[0].toUpperCase() ? priorityValue.push(uniqueMatches[0].charCodeAt(0) - 64 + 26)
-    : priorityValue.push(uniqueMatches[0].charCodeAt(0) - 96);
+    uniqueMatches[0] === uniqueMatches[0].toUpperCase()
+        ? priorityValue.push(uniqueMatches[0].charCodeAt(0) - 64 + 26)
+        : priorityValue.push(uniqueMatches[0].charCodeAt(0) - 96);
 }
-console.log('Total Priority Value:');
-console.log(priorityValue.reduce((accumulator, value) => {
-    return accumulator + value;
-}, 0));
+console.log("Total Priority Value:");
+console.log(
+    priorityValue.reduce((accumulator, value) => {
+        return accumulator + value;
+    }, 0)
+);
